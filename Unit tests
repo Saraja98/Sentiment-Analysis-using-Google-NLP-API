@@ -12,7 +12,7 @@ def main(text):
         content=text,
         type=enums.Document.Type.PLAIN_TEXT)
 
-    # Detects the sentiment of the text
+    # Tests the sentiment of the text 
     sentiment = client.analyze_sentiment(document=document).document_sentiment
 
     print('    Sentiment score: {}'.format(sentiment.score))
