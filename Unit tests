@@ -17,47 +17,39 @@ def main(text):
 
     print('    Sentiment score: {}'.format(sentiment.score))
     print('Sentiment magnitude: {}'.format(sentiment.magnitude))
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('text', help='The text you\'d like to analyze sentiment.')
-    args = parser.parse_args()
-    main(args.text)
     
-    def main(text):
-    client = language.LanguageServiceClient()
+    
+ #Parameters
+sentiment_score = 0
+sentiment_magnitude = 0.9
+neutral_test_string = "Its raining today"
+happy_test_string = "I love Jonas Brothers!"
+bad_test_string =  "I hate when it snows"
+sentiment_test_string = "happy,sad,depressing,jovial, mad,lovable"
 
-    document = types.Document(
-        content=text,
-        type=enums.Document.Type.PLAIN_TEXT)
+client = language_v1.LanguageServiceClient()
 
-    features = {'extract_syntax': True,
-                'extract_entities': True,
-                'extract_document_sentiment': True,
-                'extract_entity_sentiment': True,
-                'classify_text': False
-                }
-    response = client.annotate_text(document=document, features=features)
-    sentiment = response.document_sentiment
-    entities = response.entities
+document = language_v1.Document(content=neutral_test_string, type_=language_v1.Document.Type.PLAIN_TEXT)
+sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
+#Only Print if sentiment score is above some threshold?
+#(sentiment.score >= sentiment_score) & (sentiment.magnitude > sentiment_magnitude):
 
-    entity_type = ('UNKNOWN', 'PERSON', 'LOCATION', 'ORGANIZATION',
-                   'EVENT', 'WORK_OF_ART', 'CONSUMER_GOOD', 'OTHER')
+print("Neutral String:\nScore: " + str(sentiment.score) + "   Magnitude: " + str(sentiment.magnitude))
 
-    print('    Sentiment score: {}'.format(sentiment.score))
-    print('Sentiment magnitude: {}'.format(sentiment.magnitude))
+document = language_v1.Document(content=happy_test_string, type_=language_v1.Document.Type.PLAIN_TEXT)
+sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
 
-    for entity in entities:
-        print('=' * 20)
-        print('         name: {0}'.format(entity.name))
-        print('         type: {0}'.format(entity_type[entity.type]))
-        print('     salience: {0}'.format(entity.salience))
-        print('wikipedia_url: {0}'.format(entity.metadata.get('wikipedia_url', '-')))
+print("Happy String:\nScore: " + str(sentiment.score) + "   Magnitude: " + str(sentiment.magnitude))
+
+document = language_v1.Document(content=bad_test_string, type_=language_v1.Document.Type.PLAIN_TEXT)
+sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
+
+print("Bad String:\nScore: " + str(sentiment.score) + "   Magnitude: " + str(sentiment.magnitude))
+
+document = language_v1.Document(content=beer_test_string, type_=language_v1.Document.Type.PLAIN_TEXT)
+sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
+
+print("sentiment_test_ String:\nScore: " + str(sentiment.score) + "   Magnitude: " + str(sentiment.magnitude))
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('text', help='The text you\'d like to classify text.')
-    args = parser.parse_args()
-    main(args.text)
+
