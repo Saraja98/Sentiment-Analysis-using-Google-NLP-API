@@ -1,23 +1,30 @@
-<B>Used the Natural Language API with Python to learn how to perform sentiment analysis, entity analysis, syntax analysis, and content classification.</B>
+Used the Natural Language API with Python to learn how to perform sentiment analysis, entity analysis, syntax analysis, and content classification.
 
-<B>Sentiment Analysis</B>
+Sentiment Analysis
 
 Performed Sentiment Analysis on a string and find out the Score and Magnitude using the Natural Language API.
 The Score of the sentiment ranges between -1.0 (negative) and 1.0 (positive) and corresponds to the overall sentiment from the given information.
 The Magnitude of the sentiment ranges from 0.0 to +infinity and indicates the overall strength of sentiment from the given information. 
 The more information that is provided the higher the magnitude.
 
-<B>Entity analysis</B>
+Entity analysis
 
 Entity Analysis inspects the given information for entities by searching for proper nouns such as public figures, landmarks, etc., and returns information about those entities.
 
-<B>Syntax analysis</B>
+Syntax analysis
 
 Syntactic Analysis extracts linguistic information, breaking up the given text into a series of sentences and tokens (generally, word boundaries), providing further analysis on those tokens.
 This example will print out the number of sentences, tokens, and provide the part of speech for each token.
 
-<B>Content classification</B>
+Content classification
 
 Content Classification analyzes a document and return a list of content categories that apply to the text found in the document.
 
+Unit Tests 
+
+Tests:
+
+Twitter API test: Are the results in terms of the most trending topic on twitter accuarate. 
+How much scope of error is possible?When tested with (through twitter_api_test.py), we can validate that our API bearer tokens are valid and working, with the expected zero results when random noise is searched for. 
+Pytest is given a negative assertion (i.e. no results were found) and if results are indeed found, twitter_api_test.py will return an AssertionError. When running "pytest twitter_api_test.py" using a known, working keyword (Hello World) the test fails with AssertionError, as expected. When using a garbage string as the keyword (asdfgasdfcasezfdvsadfaews), the test passes.
 
