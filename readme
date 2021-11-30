@@ -29,6 +29,8 @@ How much scope of error is possible? When tested with (through twitter_api_test.
 Pytest is given a negative assertion (i.e. no results were found) and if results are indeed found, twitter_api_test.py will return an AssertionError. When running "pytest twitter_api_test.py" using a known, working keyword (Hello World) the test fails with AssertionError, as expected. 
 When using a garbage string as the keyword (hghuftdd), the test passes.
 
--Google NLP test: Enter strings to see generally what words return. 
-What kind of sentiments do our big keywords have? Happy,sorry,deppressed,loving etc. When testing the google api (google_api_test.py), we see expected results where the happy test string returns a high sentiment score of .9 and magnitude of .9, the bad string returns close to -1 with a magnitude of .8, and our neutral string returns a 0.0 for score and magnitude. Additionally this test shows our API key is valid and working, and the general syntax is correct. We introduced another string related to general beer terminology, which had a score of 0.5 and magnitude of 0.5, indicating that any tweets we are looking for may have an inherent positive bias.
+Google NLP test: Enter strings to see generally what words return. 
+What kind of sentiments do our big keywords have? Washington DC,Barack Obama,Taj Mahaletc. 
+When testing the google api (google_api_test.py), we see expected results where the happy test string returns a high sentiment score of .9 and magnitude of .9, the bad string returns close to -1 with a magnitude of .8, and our neutral string returns a 0.0 for score and magnitude. 
+Additionally this test shows our API key is valid and working, and the general syntax is correct. We introduced another string related to general beer terminology, which had a score of 0.5 and magnitude of 0.5, indicating that any tweets we are looking for may have an inherent positive bias.
 
